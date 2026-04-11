@@ -1349,44 +1349,60 @@
     }
   };
 
-  async function openChatFromStorage() {
-    const targetUserId = localStorage.getItem('openChatWith');
-    if (!targetUserId || !currentUser) return;
-    
-    localStorage.removeItem('openChatWith');
-    
-    try {
-      const userByIdDoc = await getDoc(doc(db, "users_by_id", targetUserId));
-      if (!userByIdDoc.exists()) return;
-      
-      const otherUid = userByIdDoc.data().uid;
-      
-      const existingChatQuery = query(
-        collection(db, "chats"),
-        where("participants", "array-contains", currentUser.uid)
-      );
-      
-      const existingChats = await getDocs(existingChatQuery);
-      let existingChatId = null;
-      
-      existingChats.forEach(doc => {
-        if (doc.data().participants.includes(otherUid)) existingChatId = doc.id;
-      });
-      
-      if (existingChatId) {
-        openChat(existingChatId);
-      } else {
-        const chatRef = await addDoc(collection(db, "chats"), {
-          participants: [currentUser.uid, otherUid],
-          createdAt: Date.now(), updatedAt: Date.now(),
-          unreadCount: {}, blockedBy: []
-        });
-        openChat(chatRef.id);
-      }
-    } catch (error) {
-      console.error("خطأ:", error);
-    }
+async function openChatFromStorage() {
+  const targetUserId = localStorage.getItem('openChatWith');
+  if (!targetUserId || !currentUser) {
+    console.log('ماكو targetUserId أو currentUser');
+    return;
   }
+  
+  localStorage.removeItem('openChatWith');
+  console.log('جاري البحث عن مستخدم:', targetUserId);
+  
+  try {
+    const userByIdDoc = await getDoc(doc(db, "users_by_id", targetUserId));
+    if (!userByIdDoc.exists()) {
+      console.log('المستخدم غير موجود في users_by_id');
+      showToast('المستخدم غير موجود', false);
+      return;
+    }
+    
+    const otherUid = userByIdDoc.data().uid;
+    console.log('تم العثور على UID:', otherUid);
+    
+    const existingChatQuery = query(
+      collection(db, "chats"),
+      where("participants", "array-contains", currentUser.uid)
+    );
+    
+    const existingChats = await getDocs(existingChatQuery);
+    let existingChatId = null;
+    
+    existingChats.forEach(doc => {
+      if (doc.data().participants.includes(otherUid)) {
+        existingChatId = doc.id;
+        console.log('تم العثور على محادثة موجودة:', existingChatId);
+      }
+    });
+    
+    if (existingChatId) {
+      openChat(existingChatId);
+    } else {
+      console.log('جاري إنشاء محادثة جديدة');
+      const chatRef = await addDoc(collection(db, "chats"), {
+        participants: [currentUser.uid, otherUid],
+        createdAt: Date.now(), 
+        updatedAt: Date.now(),
+        unreadCount: {}, 
+        blockedBy: []
+      });
+      openChat(chatRef.id);
+    }
+  } catch (error) {
+    console.error("خطأ في فتح المحادثة:", error);
+    showToast('فشل فتح المحادثة', false);
+  }
+}
 
   window.clearSearch = function() {
     document.getElementById('searchChatsInput').value = '';
@@ -1400,36 +1416,40 @@
   };
 
   // تعديل onAuthStateChanged - بدون توجيه لصفحة 404
-  onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      currentUser = user;
-      await loadUserData(user.uid);
-      
-      if (!isInitialized) {
-        isInitialized = true;
-        subscribeToChats();
-        showMainContent();
-        
-        setTimeout(() => {
-          if (localStorage.getItem('openChatWith')) {
-            openChatFromStorage();
-          }
-        }, 1000);
-      }
-    } else {
-      // عرض رسالة بدلاً من التوجيه لصفحة غير موجودة
-      const container = document.getElementById('chatsContainer');
-      if (container) {
-        container.innerHTML = `
-          <div class="empty-state">
-            <i class="fas fa-sign-in-alt"></i>
-            <p>يرجى تسجيل الدخول للوصول إلى الماسنجر</p>
-          </div>
-        `;
-      }
+  // تعديل onAuthStateChanged - بدون توجيه لصفحة 404
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    currentUser = user;
+    await loadUserData(user.uid);
+    
+    if (!isInitialized) {
+      isInitialized = true;
+      subscribeToChats();
       showMainContent();
+      
+      // ✅ تأخير أطول لضمان تحميل البيانات بالكامل
+      setTimeout(() => {
+        const targetUserId = localStorage.getItem('openChatWith');
+        if (targetUserId) {
+          console.log('فتح محادثة مع:', targetUserId); // للتأكد
+          openChatFromStorage();
+        }
+      }, 2000); // زودنا الوقت لـ 2 ثانية
     }
-  });
+  } else {
+    // عرض رسالة بدلاً من التوجيه لصفحة غير موجودة
+    const container = document.getElementById('chatsContainer');
+    if (container) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <i class="fas fa-sign-in-alt"></i>
+          <p>يرجى تسجيل الدخول للوصول إلى الماسنجر</p>
+        </div>
+      `;
+    }
+    showMainContent();
+  }
+});
 
   window.addEventListener('load', () => {
     const searchInput = document.getElementById('searchChatsInput');
