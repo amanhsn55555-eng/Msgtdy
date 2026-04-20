@@ -6,6 +6,7 @@
   <title>الماسنجر • منصتي</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
+    /* نفس الـ CSS السابق مع إضافات جديدة */
     * {
       margin: 0;
       padding: 0;
@@ -14,6 +15,7 @@
     }
 
     body {
+      
       background: linear-gradient(145deg, #f5f7fa 0%, #e8eef5 100%);
       min-height: 100vh;
       color: #0f172a;
@@ -21,6 +23,42 @@
       width: 100%;
       max-width: 100vw;
       -webkit-tap-highlight-color: transparent;
+    }
+
+    /* ========== متغيرات CSS للمحادثة ========== */
+    .chat-room {
+      --chat-bg: linear-gradient(145deg, #f5f7fa 0%, #e8eef5 100%);
+      --chat-bg-image: none;
+      --chat-bg-size: cover;
+      --chat-bg-position: center;
+      --chat-font-size: 14px;
+      --chat-font-family: 'Segoe UI', 'Tajawal', sans-serif;
+      --chat-bubble-sent-bg: linear-gradient(135deg, #fbbf24, #f59e0b);
+      --chat-bubble-received-bg: white;
+      --chat-text-sent: #0f172a;
+      --chat-text-received: #334155;
+    }
+
+    .chat-room {
+      background: var(--chat-bg-image), var(--chat-bg);
+      background-size: var(--chat-bg-size);
+      background-position: var(--chat-bg-position);
+      background-blend-mode: overlay;
+    }
+
+    .message-bubble {
+      font-size: var(--chat-font-size) !important;
+      font-family: var(--chat-font-family) !important;
+    }
+
+    .message-wrapper.sent .message-bubble {
+      background: var(--chat-bubble-sent-bg) !important;
+      color: var(--chat-text-sent) !important;
+    }
+
+    .message-wrapper.received .message-bubble {
+      background: var(--chat-bubble-received-bg) !important;
+      color: var(--chat-text-received) !important;
     }
 
     /* ========== شاشة التحميل ========== */
@@ -47,6 +85,7 @@
 
     /* ========== هيدر الماسنجر ========== */
     .messenger-header {
+      margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       position: fixed;
       top: 0;
       left: 0;
@@ -76,6 +115,7 @@
     }
 
     .messenger-header h2 {
+      margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       font-size: 18px;
       font-weight: 800;
       color: #0f172a;
@@ -85,11 +125,13 @@
     }
 
     .messenger-header h2 i {
+      margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       color: #fbbf24;
       font-size: 20px;
     }
 
     .header-icon {
+      margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       width: 38px;
       height: 38px;
       border-radius: 50%;
@@ -101,9 +143,11 @@
       cursor: pointer;
       transition: all 0.2s;
       font-size: 16px;
+      border: none;
     }
 
     .header-icon:hover {
+      margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       background: #fbbf24;
       color: #0f172a;
     }
@@ -114,11 +158,13 @@
     }
 
     .header-icon.success {
+      margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       background: linear-gradient(135deg, #10b981, #059669);
       color: white;
     }
 
     .header-icon.info {
+      margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       background: linear-gradient(135deg, #3b82f6, #2563eb);
       color: white;
     }
@@ -136,18 +182,20 @@
 
     /* ========== مربع البحث ========== */
     .search-section {
+      margin-top: 1px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       position: fixed;
       top: 62px;
       left: 0;
       right: 0;
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(20px);
-      padding: 10px 16px;
+      padding: 1px 6px;
       z-index: 998;
       border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
 
     .search-wrapper {
+      margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       display: flex;
       align-items: center;
       background: #f1f5f9;
@@ -157,11 +205,13 @@
     }
 
     .search-wrapper i {
+      margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       color: #fbbf24;
       font-size: 16px;
     }
 
     .search-wrapper input {
+      margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       flex: 1;
       border: none;
       padding: 12px 10px;
@@ -177,6 +227,7 @@
     }
 
     .search-wrapper button {
+      margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       background: linear-gradient(135deg, #fbbf24, #f59e0b);
       border: none;
       color: #0f172a;
@@ -217,6 +268,7 @@
     }
 
     .all-chats-header {
+      margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -425,7 +477,9 @@
     }
 
     /* ========== نافذة البحث عن عضو ========== */
+  
     .search-user-modal {
+      margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       position: fixed;
       inset: 0;
       background: rgba(0, 0, 0, 0.5);
@@ -437,10 +491,12 @@
     }
 
     .search-user-modal.active {
+      margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       display: flex;
     }
 
     .search-user-dialog {
+      margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       background: white;
       border-radius: 25px;
       padding: 20px;
@@ -453,6 +509,7 @@
     }
 
     .search-user-header {
+      margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -462,6 +519,7 @@
     }
 
     .search-user-header h3 {
+      margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       font-size: 18px;
       font-weight: 800;
       display: flex;
@@ -494,6 +552,7 @@
     }
 
     .search-user-input-group button {
+      margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       padding: 14px 20px;
       background: #10b981;
       color: white;
@@ -509,6 +568,7 @@
     }
 
     .search-user-item {
+      margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       display: flex;
       align-items: center;
       gap: 12px;
@@ -560,6 +620,7 @@
 
     /* ========== نافذة الفلتر ========== */
     .filter-modal {
+      margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       position: fixed;
       inset: 0;
       background: rgba(0, 0, 0, 0.5);
@@ -571,10 +632,12 @@
     }
 
     .filter-modal.active {
+      margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       display: flex;
     }
 
     .filter-dialog {
+      margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       background: white;
       border-radius: 25px;
       padding: 20px;
@@ -585,6 +648,7 @@
     }
 
     .filter-header {
+      margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -632,6 +696,7 @@
     }
 
     .filter-input-group button {
+      margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       padding: 12px 18px;
       background: #3b82f6;
       color: white;
@@ -676,12 +741,14 @@
 
     /* سجل المراقبة */
     .monitor-log-section {
+      margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       margin-top: 20px;
       border-top: 2px solid #f1f5f9;
       padding-top: 15px;
     }
 
     .monitor-log-header {
+      margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -702,6 +769,7 @@
     }
 
     .monitor-log-search input {
+      margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       border: none;
       background: transparent;
       padding: 8px;
@@ -720,6 +788,7 @@
     }
 
     .monitor-log-item {
+      margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -792,6 +861,7 @@
 
     /* ========== قائمة المحادثات ========== */
     .chats-container {
+      margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e25850) !important; border: none !important; box-shadow: inset 2px 2px 5px #555fff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       margin-top: 125px;
       padding: 10px 12px 20px;
       max-width: 600px;
@@ -800,6 +870,7 @@
     }
 
     .chat-item {
+      
       background: white;
       border-radius: 20px;
       padding: 14px;
@@ -874,6 +945,16 @@
       gap: 6px;
     }
 
+    .chat-nickname {
+      font-size: 12px;
+      font-weight: 500;
+      color: #8b5cf6;
+      background: #ede9fe;
+      padding: 2px 8px;
+      border-radius: 20px;
+      margin-right: 5px;
+    }
+
     .chat-id {
       font-size: 10px;
       padding: 2px 6px;
@@ -936,12 +1017,12 @@
 
     /* ========== غرفة الدردشة ========== */
     .chat-room {
+
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(145deg, #f5f7fa 0%, #e8eef5 100%);
       z-index: 2000;
       display: none;
       flex-direction: column;
@@ -952,6 +1033,8 @@
     }
 
     .chat-room-header {
+     
+margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center; 
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(20px);
       padding: 12px 16px;
@@ -984,11 +1067,13 @@
     }
 
     .chat-room-name {
+      
       font-weight: 800;
       font-size: 16px;
       display: flex;
       align-items: center;
       gap: 6px;
+      flex-wrap: wrap;
     }
 
     .chat-room-status {
@@ -1008,6 +1093,14 @@
     }
 
     .chat-room-actions i:hover {
+      color: #fbbf24;
+    }
+
+    .chat-room-actions i.fa-trash:hover {
+      color: #ef4444;
+    }
+
+    .chat-room-actions i.fa-ban:hover {
       color: #ef4444;
     }
 
@@ -1058,20 +1151,64 @@
     }
 
     .message-wrapper.received .message-bubble {
-      background: white;
       border-bottom-right-radius: 5px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
 
     .message-wrapper.sent .message-bubble {
-      background: linear-gradient(135deg, #fbbf24, #f59e0b);
-      color: #0f172a;
       border-bottom-left-radius: 5px;
     }
 
     .message-text {
       font-size: 14px;
       line-height: 1.5;
+    }
+
+    /* تنسيق الروابط والصور والفيديوهات */
+    .message-text a {
+      color: inherit;
+      text-decoration: underline;
+      word-break: break-all;
+    }
+
+    .message-media {
+      max-width: 250px;
+      margin-top: 8px;
+      border-radius: 15px;
+      overflow: hidden;
+    }
+
+    .message-media img {
+      width: 100%;
+      height: auto;
+      display: block;
+      cursor: pointer;
+    }
+
+    .message-media iframe {
+      width: 100%;
+      height: 160px;
+      border: none;
+    }
+
+    .youtube-preview {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(0, 0, 0, 0.05);
+      padding: 10px;
+      border-radius: 12px;
+      margin-top: 8px;
+      cursor: pointer;
+    }
+
+    .youtube-preview i {
+      font-size: 30px;
+      color: #ff0000;
+    }
+
+    .youtube-preview span {
+      font-size: 12px;
     }
 
     .message-sender-name {
@@ -1114,7 +1251,9 @@
 
     /* ========== شريط الإدخال ========== */
     .message-input-container {
-      background: white;
+      
+margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
+      background: rgba(255, 255, 255, 0.95);
       padding: 12px 16px;
       display: flex;
       align-items: center;
@@ -1123,6 +1262,8 @@
     }
 
     .message-input-container input {
+      
+margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
       flex: 1;
       border: none;
       padding: 14px 18px;
@@ -1133,13 +1274,328 @@
     }
 
     .message-input-container button {
-      width: 48px;
-      height: 48px;
+      
+margin-top: 8px; background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important; border: none !important; box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important; border-radius: 30px !important; padding: 2px 2px 2px 10px !important; display: flex; align-items: center;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
       background: linear-gradient(135deg, #fbbf24, #f59e0b);
       border: none;
       color: #0f172a;
       font-size: 18px;
+      cursor: pointer;
+    }
+
+    /* ========== نافذة إعدادات المحادثة ========== */
+    .chat-settings-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+      z-index: 4500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chat-settings-modal.active {
+      display: flex;
+    }
+
+    .chat-settings-dialog {
+      background: white;
+      border-radius: 25px;
+      padding: 20px;
+      width: 95%;
+      max-width: 500px;
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+
+    .settings-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 10px;
+    }
+
+    .settings-tab {
+      padding: 8px 16px;
+      border-radius: 20px;
+      background: #f1f5f9;
+      color: #64748b;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .settings-tab.active {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      color: #0f172a;
+    }
+
+    .settings-panel {
+      display: none;
+    }
+
+    .settings-panel.active {
+      display: block;
+    }
+
+    .settings-section {
+      margin-bottom: 20px;
+    }
+
+    .settings-section h4 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .settings-input-group {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .settings-input-group input {
+      flex: 1;
+      padding: 12px;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .settings-input-group button {
+      padding: 12px 18px;
+      background: #fbbf24;
+      border: none;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .bg-url-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 150px;
+      overflow-y: auto;
+    }
+
+    .bg-url-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      background: #f8fafc;
+      border-radius: 12px;
+      font-size: 12px;
+    }
+
+    .bg-url-item span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      flex: 1;
+    }
+
+    .color-picker-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .color-picker-group label {
+      min-width: 80px;
+      font-size: 13px;
+    }
+
+    .color-picker-group input {
+      flex: 1;
+      height: 40px;
+      border: 2px solid #e2e8f0;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .font-selector {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .font-selector select {
+      flex: 1;
+      padding: 12px;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      font-size: 13px;
+    }
+
+    .font-size-slider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .font-size-slider input {
+      flex: 1;
+    }
+
+    /* قائمة الإيموجيات */
+    .emoji-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 15px;
+      max-height: 200px;
+      overflow-y: auto;
+      padding: 10px;
+      background: #f8fafc;
+      border-radius: 15px;
+    }
+
+    .emoji-item {
+      font-size: 28px;
+      cursor: pointer;
+      padding: 5px;
+      border-radius: 10px;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .emoji-item:hover {
+      background: #e2e8f0;
+      transform: scale(1.1);
+    }
+
+    .emoji-item .delete-emoji {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: #ef4444;
+      color: white;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .emoji-item:hover .delete-emoji {
+      opacity: 1;
+    }
+
+    .add-emoji-section {
+      display: flex;
+      gap: 8px;
+    }
+
+    .add-emoji-section input {
+      flex: 1;
+      padding: 12px;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    /* قائمة الاختصارات */
+    .shortcut-list {
+      margin-bottom: 15px;
+      max-height: 250px;
+      overflow-y: auto;
+    }
+
+    .shortcut-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px;
+      background: #f8fafc;
+      border-radius: 12px;
+      margin-bottom: 8px;
+    }
+
+    .shortcut-info {
+      flex: 1;
+    }
+
+    .shortcut-key {
+      font-weight: 700;
+      font-size: 14px;
+      color: #8b5cf6;
+    }
+
+    .shortcut-value {
+      font-size: 12px;
+      color: #64748b;
+      margin-top: 3px;
+      word-break: break-all;
+    }
+
+    .shortcut-actions {
+      display: flex;
+      gap: 5px;
+    }
+
+    .shortcut-actions i {
+      cursor: pointer;
+      padding: 5px;
+      color: #64748b;
+    }
+
+    .shortcut-actions i.fa-trash:hover {
+      color: #ef4444;
+    }
+
+    /* ========== نافذة عرض الصورة ========== */
+    .image-viewer-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 5000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-viewer-modal.active {
+      display: flex;
+    }
+
+    .image-viewer-content {
+      max-width: 90vw;
+      max-height: 90vh;
+      position: relative;
+    }
+
+    .image-viewer-content img {
+      max-width: 100%;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+
+    .image-viewer-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      color: white;
+      font-size: 30px;
       cursor: pointer;
     }
 
@@ -1257,23 +1713,23 @@
     <div class="back-btn" onclick="goBack()">
       <i class="fas fa-arrow-right"></i>
     </div>
-    
+    <h2><i class="fab fa-facebook-messenger"></i> الماسنجر</h2>
   </div>
   <div class="header-right">
-    <div class="header-icon primary" onclick="showAllChatsModal()" title="جميع المحادثات">
-      <i class="fas fa-users"></i>
-    </div>
+    <div class="header-iconprimary" onclick="showAllChatsModal()" title="جميع المحادثات">
+      <i class="fas fa-user-lus"></i>
+ </div>
     <div class="header-icon success" onclick="showSearchUserModal()" title="بحث عن عضو">
-      <i class="fas fa-user-search"></i>
+        <i class="fas fa-user-plus"></i>
     </div>
-    <div class="header-icon info" onclick="showFilterModal()" title="الفلتر">
-      <i class="fas fa-filter"></i>
+    <div class="header-iconnfo" onclick="showFilterModal()" title="الفلتر">
+      <i class="fas fa-fier"></i>
     </div>
-    <div class="header-icon" onclick="showNewChatModal()" title="محادثة جديدة">
-      <i class="fas fa-user-plus"></i>
+    <div class="header-ion" onclick="showNewChatModal()" title="محادثة جديدة">
+      <i class="fas fa-user-pus"></i>
     </div>
-    <div class="header-icon" onclick="refreshChats()" title="تحديث">
-      <i class="fas fa-sync-alt"></i>
+    <div class="hear-icon" onclick="refreshChats()" title="تحديث">
+      <i class="f fa-sync-alt"></i>
     </div>
   </div>
 </div>
@@ -1309,6 +1765,7 @@
       <div class="chat-room-status" id="chatRoomStatus">متصل</div>
     </div>
     <div class="chat-room-actions">
+      <i class="fas fa-cog" onclick="showChatSettings()" title="إعدادات المحادثة"></i>
       <i class="fas fa-ban" onclick="blockUserFromChat()" id="blockBtn" title="حظر"></i>
       <i class="fas fa-trash" onclick="deleteChatFromRoom()" title="حذف"></i>
     </div>
@@ -1320,8 +1777,136 @@
   </div>
 </div>
 
+<!-- نافذة إعدادات المحادثة -->
+<div class="chat-settings-modal" id="chatSettingsModal">
+  <div class="chat-settings-dialog">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+      <h3><i class="fas fa-cog"></i> إعدادات المحادثة</h3>
+      <i class="fas fa-times" onclick="closeChatSettings()" style="cursor: pointer;"></i>
+    </div>
+    
+    <div class="settings-tabs">
+      <div class="settings-tab active" onclick="switchSettingsTab('nickname')">الكنية</div>
+      <div class="settings-tab" onclick="switchSettingsTab('appearance')">المظهر</div>
+      <div class="settings-tab" onclick="switchSettingsTab('emoji')">الإيموجي</div>
+      <div class="settings-tab" onclick="switchSettingsTab('shortcuts')">الاختصارات</div>
+    </div>
+    
+    <!-- تبويب الكنية -->
+    <div class="settings-panel active" id="panel-nickname">
+      <div class="settings-section">
+        <h4><i class="fas fa-tag"></i> الكنية في هذه المحادثة</h4>
+        <div class="settings-input-group">
+          <input type="text" id="nicknameInput" placeholder="أدخل كنية...">
+          <button onclick="saveNickname()"><i class="fas fa-save"></i> حفظ</button>
+        </div>
+        <div id="currentNicknameDisplay" style="margin-top: 10px; font-size: 13px; color: #64748b;"></div>
+        <button onclick="deleteNickname()" style="margin-top: 10px; padding: 8px 16px; background: #fee2e2; color: #dc2626; border: none; border-radius: 10px; cursor: pointer;">
+          <i class="fas fa-trash"></i> حذف الكنية
+        </button>
+      </div>
+    </div>
+    
+    <!-- تبويب المظهر -->
+    <div class="settings-panel" id="panel-appearance">
+      <div class="settings-section">
+        <h4><i class="fas fa-image"></i> خلفية المحادثة</h4>
+        <div class="settings-input-group">
+          <input type="text" id="bgUrlInput" placeholder="أدخل رابط الصورة...">
+          <button onclick="addBackgroundUrl()"><i class="fas fa-plus"></i></button>
+        </div>
+        <div class="bg-url-list" id="bgUrlList"></div>
+        <button onclick="removeBackground()" style="margin-top: 10px; padding: 8px 16px; background: #f1f5f9; border: none; border-radius: 10px; cursor: pointer;">
+          <i class="fas fa-times"></i> إزالة الخلفية
+        </button>
+      </div>
+      
+      <div class="settings-section">
+        <h4><i class="fas fa-palette"></i> الألوان</h4>
+        <div class="color-picker-group">
+          <label>خلفية رسائلي</label>
+          <input type="color" id="sentBubbleColor" value="#fbbf24">
+        </div>
+        <div class="color-picker-group">
+          <label>خلفية رسائل الطرف</label>
+          <input type="color" id="receivedBubbleColor" value="#ffffff">
+        </div>
+        <div class="color-picker-group">
+          <label>لون نص رسائلي</label>
+          <input type="color" id="sentTextColor" value="#0f172a">
+        </div>
+        <div class="color-picker-group">
+          <label>لون نص الطرف</label>
+          <input type="color" id="receivedTextColor" value="#334155">
+        </div>
+        <button onclick="applyColors()" style="width: 100%; padding: 12px; background: linear-gradient(135deg, #fbbf24, #f59e0b); border: none; border-radius: 12px; font-weight: 700; cursor: pointer;">
+          تطبيق الألوان
+        </button>
+      </div>
+      
+      <div class="settings-section">
+        <h4><i class="fas fa-font"></i> الخط</h4>
+        <div class="font-selector">
+          <select id="fontFamilySelect">
+            <option value="'Segoe UI', 'Tajawal', sans-serif">الافتراضي</option>
+            <option value="'Cairo', sans-serif">Cairo</option>
+            <option value="'Amiri', serif">Amiri</option>
+            <option value="'Reem Kufi', sans-serif">Reem Kufi</option>
+            <option value="'Almarai', sans-serif">Almarai</option>
+          </select>
+        </div>
+        <div class="font-size-slider">
+          <span style="font-size: 12px;">A</span>
+          <input type="range" id="fontSizeSlider" min="12" max="20" value="14">
+          <span style="font-size: 18px;">A</span>
+          <span id="fontSizeValue">14px</span>
+        </div>
+        <button onclick="applyFont()" style="width: 100%; margin-top: 10px; padding: 12px; background: #3b82f6; color: white; border: none; border-radius: 12px; font-weight: 700; cursor: pointer;">
+          تطبيق الخط
+        </button>
+      </div>
+    </div>
+    
+    <!-- تبويب الإيموجي -->
+    <div class="settings-panel" id="panel-emoji">
+      <div class="settings-section">
+        <h4><i class="fas fa-smile"></i> الإيموجيات المخصصة</h4>
+        <div class="emoji-list" id="customEmojiList"></div>
+        <div class="add-emoji-section">
+          <input type="text" id="newEmojiInput" placeholder="😊" maxlength="2">
+          <button onclick="addCustomEmoji()"><i class="fas fa-plus"></i> إضافة</button>
+        </div>
+        <p style="font-size: 12px; color: #64748b; margin-top: 10px;">اضغط على الإيموجي لإضافته للرسالة</p>
+      </div>
+    </div>
+    
+    <!-- تبويب الاختصارات -->
+    <div class="settings-panel" id="panel-shortcuts">
+      <div class="settings-section">
+        <h4><i class="fas fa-bolt"></i> اختصارات سريعة</h4>
+        <div class="settings-input-group">
+          <input type="text" id="shortcutKeyInput" placeholder="الاختصار مثال: /مرحبا">
+          <input type="text" id="shortcutValueInput" placeholder="النص أو رابط الصورة">
+          <button onclick="addShortcut()"><i class="fas fa-plus"></i></button>
+        </div>
+        <div class="shortcut-list" id="shortcutList"></div>
+        <p style="font-size: 12px; color: #64748b;">اكتب الاختصار في الرسالة وسيتحول تلقائياً</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة عرض الصورة -->
+<div class="image-viewer-modal" id="imageViewerModal" onclick="closeImageViewer()">
+  <div class="image-viewer-content">
+    <i class="fas fa-times image-viewer-close" onclick="closeImageViewer()"></i>
+    <img id="viewerImage" src="" alt="">
+  </div>
+</div>
+
 <!-- نافذة جميع المحادثات (للمراقبة) -->
 <div class="all-chats-modal" id="allChatsModal">
+  <!-- نفس المحتوى السابق -->
   <div class="all-chats-dialog">
     <div class="all-chats-header">
       <h3><i class="fas fa-users"></i> جميع المحادثات - مراقبة</h3>
@@ -1344,6 +1929,7 @@
 
 <!-- نافذة البحث عن عضو -->
 <div class="search-user-modal" id="searchUserModal">
+  <!-- نفس المحتوى السابق -->
   <div class="search-user-dialog">
     <div class="search-user-header">
       <h3><i class="fas fa-user-search"></i> البحث عن عضو</h3>
@@ -1364,12 +1950,12 @@
 
 <!-- نافذة الفلتر -->
 <div class="filter-modal" id="filterModal">
+  <!-- نفس المحتوى السابق -->
   <div class="filter-dialog">
     <div class="filter-header">
       <h3><i class="fas fa-filter"></i> إعدادات الفلتر</h3>
       <i class="fas fa-times" onclick="closeFilterModal()"></i>
     </div>
-    
     <div class="filter-section">
       <h4><i class="fas fa-ban" style="color: #ef4444;"></i> كلمات محظورة</h4>
       <div class="filter-input-group">
@@ -1378,7 +1964,6 @@
       </div>
       <div class="word-list" id="forbiddenWordsList"></div>
     </div>
-    
     <div class="filter-section">
       <h4><i class="fas fa-eye" style="color: #3b82f6;"></i> كلمات مراقبة</h4>
       <div class="filter-input-group">
@@ -1387,7 +1972,6 @@
       </div>
       <div class="word-list" id="monitoredWordsList"></div>
     </div>
-    
     <div class="monitor-log-section">
       <div class="monitor-log-header">
         <h4><i class="fas fa-history"></i> سجل المراقبة</h4>
@@ -1448,23 +2032,33 @@
 
 <div id="toastMsg"></div>
 
+<!-- عناصر الصوت -->
+<audio id="sendSound" preload="auto">
+  <source src="https://www.soundjay.com/misc/sounds/bell-ringing-01.mp3" type="audio/mpeg">
+</audio>
+<audio id="receiveSound" preload="auto">
+  <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" type="audio/mpeg">
+</audio>
+
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
   import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
   import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, query, where, getDocs, addDoc, deleteDoc, onSnapshot, orderBy, limit, writeBatch } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
 
   const firebaseConfig = {
-    apiKey: "AIzaSyDYKCCTcurNcJslrNKqdiJCoIIK-YZArB4",
-    authDomain: "sbaq-fc46f.firebaseapp.com",
-    projectId: "sbaq-fc46f",
-    storageBucket: "sbaq-fc46f.firebasestorage.app",
-    appId: "1:1026865750415:web:0ee39a717bcafaa0d06bfa"
-  };
-
+  apiKey: "AIzaSyCPBrZMo6IYCwCDYV3HEfNcUmLUITR6VRc",
+  authDomain: "elahbes.firebaseapp.com",
+  projectId: "elahbes",
+  storageBucket: "elahbes.firebasestorage.app",
+  messagingSenderId: "800207969145",
+  appId: "1:800207969145:web:aa19b725d1c92dd48fada8",
+  measurementId: "G-EFT566SJMP"
+};
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const db = getFirestore(app);
 
+  // ========== المتغيرات العامة ==========
   let currentUser = null;
   let currentUserData = null;
   let chats = [];
@@ -1487,7 +2081,27 @@
   let allChatsList = [];
   let allChatsSearchTerm = '';
   let allUsersCache = {};
+  
+  // إعدادات المحادثة
+  let chatSettings = {
+    nickname: '',
+    backgroundUrl: '',
+    sentBubbleColor: '#fbbf24',
+    receivedBubbleColor: '#ffffff',
+    sentTextColor: '#0f172a',
+    receivedTextColor: '#334155',
+    fontFamily: "'Segoe UI', 'Tajawal', sans-serif",
+    fontSize: 14,
+    customEmojis: [],
+    shortcuts: {}
+  };
+  
+  // مراجع الصوت
+  let sendSound;
+  let receiveSound;
+  let lastMessageSenderId = null;
 
+  // ========== دوال مساعدة ==========
   function showToast(msg, isSuccess = true) {
     const t = document.getElementById('toastMsg');
     if (!t) return;
@@ -1495,6 +2109,24 @@
     t.style.background = isSuccess ? '#10b981' : '#ef4444';
     t.classList.add('show');
     setTimeout(() => t.classList.remove('show'), 2800);
+  }
+
+  function playSendSound() {
+    try {
+      if (sendSound) {
+        sendSound.currentTime = 0;
+        sendSound.play().catch(() => {});
+      }
+    } catch (e) {}
+  }
+
+  function playReceiveSound() {
+    try {
+      if (receiveSound) {
+        receiveSound.currentTime = 0;
+        receiveSound.play().catch(() => {});
+      }
+    } catch (e) {}
   }
 
   function showMainContent() {
@@ -1530,6 +2162,61 @@
     return user.emoji || '👤';
   }
 
+  function detectUrls(text) {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    return text.match(urlRegex) || [];
+  }
+
+  function isImageUrl(url) {
+    return /\.(jpg|jpeg|png|gif|webp|bmp|svg)(\?.*)?$/i.test(url);
+  }
+
+  function isYouTubeUrl(url) {
+    return /(youtube\.com|youtu\.be)/i.test(url);
+  }
+
+  function getYouTubeVideoId(url) {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
+  }
+
+  function renderMessageContent(text) {
+    if (!text) return '';
+    
+    const urls = detectUrls(text);
+    let content = text;
+    
+    urls.forEach(url => {
+      if (isImageUrl(url)) {
+        content = content.replace(url, `<div class="message-media"><img src="${url}" onclick="viewImage('${url}')" style="cursor:pointer;"></div>`);
+      } else if (isYouTubeUrl(url)) {
+        const videoId = getYouTubeVideoId(url);
+        if (videoId) {
+          content = content.replace(url, `
+            <div class="message-media">
+              <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
+            </div>
+          `);
+        }
+      } else {
+        content = content.replace(url, `<a href="${url}" target="_blank">${url}</a>`);
+      }
+    });
+    
+    return content;
+  }
+
+  window.viewImage = function(url) {
+    document.getElementById('viewerImage').src = url;
+    document.getElementById('imageViewerModal').classList.add('active');
+  };
+
+  window.closeImageViewer = function() {
+    document.getElementById('imageViewerModal').classList.remove('active');
+  };
+
+  // ========== دوال المستخدم ==========
   async function getUserData(uid) {
     if (allUsersCache[uid]) return allUsersCache[uid];
     try {
@@ -1557,6 +2244,7 @@
     }
   }
 
+  // ========== إعدادات الفلتر ==========
   async function loadFilterSettings() {
     if (!currentUser) return;
     try {
@@ -1599,7 +2287,6 @@
     if (!currentUser) return true;
     const lowerText = text.toLowerCase();
     
-    // فحص الكلمات المحظورة
     for (const word of forbiddenWords) {
       if (lowerText.includes(word.toLowerCase())) {
         showToast(`تم منع الرسالة لاحتوائها على كلمة محظورة: "${word}"`, false);
@@ -1607,7 +2294,6 @@
       }
     }
     
-    // فحص الكلمات المراقبة
     for (const word of monitoredWords) {
       if (lowerText.includes(word.toLowerCase())) {
         await addDoc(collection(db, "monitor_logs", currentUser.uid, "logs"), {
@@ -1619,6 +2305,7 @@
     return true;
   }
 
+  // ========== دوال جميع المحادثات (للمراقبة) ==========
   async function loadAllChats() {
     try {
       const chatsQuery = query(collection(db, "chats"));
@@ -1764,8 +2451,7 @@
     `;
     document.getElementById('chatRoomStatus').textContent = '👁️ مراقبة (مخفي)';
     
-    const blockBtn = document.getElementById('blockBtn');
-    blockBtn.style.display = 'none';
+    document.getElementById('blockBtn').style.display = 'none';
     
     document.getElementById('messageInputContainer').innerHTML = `
       <input type="text" id="messageInput" placeholder="اكتب رسالتك كمراقب..." autocomplete="off">
@@ -1825,7 +2511,6 @@
       
       const sender = msg.sender || {};
       const isSent = msg.senderId === currentUser.uid;
-      const isAdmin = msg.isAdmin || false;
       
       html += `
         <div class="message-wrapper ${isSent ? 'sent' : 'received'}">
@@ -1836,7 +2521,7 @@
           ` : ''}
           <div class="message-bubble" style="${isSent ? '' : `background: white;`}">
             ${!isSent ? `<div class="message-sender-name" style="color: ${sender.colors?.name || '#f59e0b'};">${sender.username || 'مستخدم'}</div>` : ''}
-            <div class="message-text">${msg.text || ''}</div>
+            <div class="message-text">${renderMessageContent(msg.text || '')}</div>
             <div class="message-time">${formatTime(msg.timestamp)}</div>
           </div>
           ${isSent ? `
@@ -1866,6 +2551,7 @@
         lastMessageText: text, lastMessageTime: Date.now(), updatedAt: Date.now()
       });
       input.value = '';
+      playSendSound();
     } catch (error) {
       showToast('فشل إرسال الرسالة', false);
     }
@@ -1896,6 +2582,7 @@
     document.getElementById('allChatsModal').classList.remove('active');
   };
 
+  // ========== دوال البحث عن عضو ==========
   window.showSearchUserModal = function() {
     document.getElementById('searchUserModal').classList.add('active');
     document.getElementById('searchUserIdInput').value = '';
@@ -1926,7 +2613,6 @@
     try {
       let foundUsers = [];
       
-      // البحث المباشر في users_by_id
       const userByIdDoc = await getDoc(doc(db, "users_by_id", searchVal));
       if (userByIdDoc.exists()) {
         const userData = userByIdDoc.data();
@@ -1936,7 +2622,6 @@
         }
       }
       
-      // إذا لم نجد، نبحث في users
       if (foundUsers.length === 0) {
         const usersSnap = await getDocs(collection(db, "users"));
         usersSnap.forEach(doc => {
@@ -1982,14 +2667,12 @@
     }
     
     try {
-      // البحث عن المستخدم
       const userByIdDoc = await getDoc(doc(db, "users_by_id", userId));
       let otherUid = null;
       
       if (userByIdDoc.exists()) {
         otherUid = userByIdDoc.data().uid;
       } else {
-        // البحث في users
         const usersSnap = await getDocs(query(collection(db, "users"), where("userId", "==", userId)));
         if (!usersSnap.empty) {
           otherUid = usersSnap.docs[0].id;
@@ -2006,7 +2689,6 @@
         return;
       }
       
-      // البحث عن محادثة موجودة
       const existingChats = await getDocs(query(collection(db, "chats"), where("participants", "array-contains", currentUser.uid)));
       let existingChatId = null;
       
@@ -2036,6 +2718,7 @@
     }
   };
 
+  // ========== دوال المحادثات ==========
   function subscribeToChats() {
     if (!currentUser) return;
     if (unsubscribeChats) unsubscribeChats();
@@ -2071,6 +2754,14 @@
           }
         }
         
+        // تحميل إعدادات المحادثة
+        try {
+          const settingsDoc = await getDoc(doc(db, "chat_settings", `${currentUser.uid}_${chat.id}`));
+          if (settingsDoc.exists()) {
+            chat.settings = settingsDoc.data();
+          }
+        } catch (e) {}
+        
         chatsData.push(chat);
       }
       
@@ -2088,8 +2779,10 @@
       if (!otherUser) return false;
       
       const searchLower = searchTerm.toLowerCase();
+      const nickname = chat.settings?.nickname || '';
       return (otherUser.username || '').toLowerCase().includes(searchLower) ||
              (otherUser.userId || '').includes(searchTerm) ||
+             nickname.toLowerCase().includes(searchLower) ||
              (chat.lastMessage?.text || '').toLowerCase().includes(searchLower);
     });
     
@@ -2116,6 +2809,8 @@
       const isOtherBlocked = chat.blockedBy?.includes(otherUid);
       const unreadCount = chat.unreadCount?.[currentUser.uid] || 0;
       const lastMessage = chat.lastMessage;
+      const nickname = chat.settings?.nickname || '';
+      const displayName = nickname || otherUser?.username || 'مستخدم';
       
       return `
         <div class="chat-item ${isOtherBlocked ? 'blocked' : ''}" onclick="openChat('${chat.id}')">
@@ -2126,7 +2821,8 @@
           <div class="chat-info">
             <div class="chat-header">
               <div class="chat-name">
-                <span style="color: ${otherUser?.colors?.name || '#0f172a'};">${otherUser?.username || 'مستخدم'}</span>
+                <span style="color: ${otherUser?.colors?.name || '#0f172a'};">${displayName}</span>
+                ${nickname ? `<span class="chat-nickname">${nickname}</span>` : ''}
                 <span class="chat-id" style="background: ${otherUser?.colors?.frame || '#fbbf24'}; color: ${otherUser?.colors?.id || '#8b5cf6'};">#${otherUser?.userId || ''}</span>
               </div>
               <span class="chat-time">${lastMessage ? formatTime(lastMessage.timestamp) : ''}</span>
@@ -2167,12 +2863,17 @@
     const otherUid = activeChatData.participants.find(p => p !== currentUser.uid);
     activeOtherUser = await getUserData(otherUid);
     
+    // تحميل إعدادات المحادثة
+    await loadChatSettings(chatId);
+    
     const isOtherBlocked = activeChatData.blockedBy?.includes(otherUid);
+    const displayName = chatSettings.nickname || activeOtherUser?.username || 'مستخدم';
     
     document.getElementById('chatRoomAvatar').innerHTML = renderAvatar(activeOtherUser);
     document.getElementById('chatRoomAvatar').style.borderColor = activeOtherUser?.colors?.frame || '#fbbf24';
     document.getElementById('chatRoomName').innerHTML = `
-      <span style="color: ${activeOtherUser?.colors?.name || '#0f172a'};">${activeOtherUser?.username || 'مستخدم'}</span>
+      <span style="color: ${activeOtherUser?.colors?.name || '#0f172a'};">${displayName}</span>
+      ${chatSettings.nickname ? `<span class="chat-nickname">${chatSettings.nickname}</span>` : ''}
       <span class="chat-id" style="background: ${activeOtherUser?.colors?.frame || '#fbbf24'}; color: ${activeOtherUser?.colors?.id || '#8b5cf6'};">#${activeOtherUser?.userId || ''}</span>
     `;
     document.getElementById('chatRoomStatus').textContent = isOtherBlocked ? 'محظور' : 'متصل';
@@ -2181,6 +2882,9 @@
     blockBtn.style.display = 'block';
     blockBtn.style.color = isOtherBlocked ? '#10b981' : '#64748b';
     blockBtn.title = isOtherBlocked ? 'إلغاء الحظر' : 'حظر المستخدم';
+    
+    // تطبيق إعدادات المظهر
+    applyChatAppearance();
     
     const inputContainer = document.getElementById('messageInputContainer');
     
@@ -2198,6 +2902,7 @@
           msgInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') sendMessage();
           });
+          msgInput.addEventListener('input', handleShortcutInput);
         }
       }, 100);
     }
@@ -2214,6 +2919,57 @@
     document.getElementById('chatRoom').classList.add('active');
   };
 
+  async function loadChatSettings(chatId) {
+    try {
+      const settingsDoc = await getDoc(doc(db, "chat_settings", `${currentUser.uid}_${chatId}`));
+      if (settingsDoc.exists()) {
+        chatSettings = { ...chatSettings, ...settingsDoc.data() };
+      } else {
+        // إعادة تعيين الإعدادات الافتراضية
+        chatSettings = {
+          nickname: '',
+          backgroundUrl: '',
+          sentBubbleColor: '#fbbf24',
+          receivedBubbleColor: '#ffffff',
+          sentTextColor: '#0f172a',
+          receivedTextColor: '#334155',
+          fontFamily: "'Segoe UI', 'Tajawal', sans-serif",
+          fontSize: 14,
+          customEmojis: [],
+          shortcuts: {}
+        };
+      }
+    } catch (e) {
+      console.error("خطأ في تحميل إعدادات المحادثة:", e);
+    }
+  }
+
+  async function saveChatSettings() {
+    if (!activeChatId || !currentUser) return;
+    try {
+      await setDoc(doc(db, "chat_settings", `${currentUser.uid}_${activeChatId}`), chatSettings);
+    } catch (e) {
+      console.error("خطأ في حفظ إعدادات المحادثة:", e);
+    }
+  }
+
+  function applyChatAppearance() {
+    const chatRoom = document.getElementById('chatRoom');
+    
+    if (chatSettings.backgroundUrl) {
+      chatRoom.style.setProperty('--chat-bg-image', `url('${chatSettings.backgroundUrl}')`);
+    } else {
+      chatRoom.style.setProperty('--chat-bg-image', 'none');
+    }
+    
+    chatRoom.style.setProperty('--chat-bubble-sent-bg', chatSettings.sentBubbleColor);
+    chatRoom.style.setProperty('--chat-bubble-received-bg', chatSettings.receivedBubbleColor);
+    chatRoom.style.setProperty('--chat-text-sent', chatSettings.sentTextColor);
+    chatRoom.style.setProperty('--chat-text-received', chatSettings.receivedTextColor);
+    chatRoom.style.setProperty('--chat-font-family', chatSettings.fontFamily);
+    chatRoom.style.setProperty('--chat-font-size', chatSettings.fontSize + 'px');
+  }
+
   function subscribeToMessages(chatId) {
     if (unsubscribeMessages) unsubscribeMessages();
     
@@ -2225,6 +2981,7 @@
     unsubscribeMessages = onSnapshot(messagesQuery, async (snapshot) => {
       const messages = [];
       const unreadMessages = [];
+      let hasNewMessage = false;
       
       for (const docSnap of snapshot.docs) {
         const msg = { id: docSnap.id, ...docSnap.data() };
@@ -2235,7 +2992,15 @@
         
         if (msg.senderId !== currentUser.uid && !msg.read) {
           unreadMessages.push(docSnap.ref);
+          if (msg.senderId !== lastMessageSenderId) {
+            hasNewMessage = true;
+            lastMessageSenderId = msg.senderId;
+          }
         }
+      }
+      
+      if (hasNewMessage && document.getElementById('chatRoom').classList.contains('active')) {
+        playReceiveSound();
       }
       
       if (unreadMessages.length > 0) {
@@ -2275,6 +3040,7 @@
       
       const isSent = msg.senderId === currentUser.uid;
       const sender = isSent ? currentUserData : (msg.sender || activeOtherUser);
+      const senderDisplayName = (isSent ? '' : (chatSettings.nickname || sender?.username || 'مستخدم'));
       
       html += `
         <div class="message-wrapper ${isSent ? 'sent' : 'received'}">
@@ -2283,8 +3049,9 @@
               ${renderAvatar(sender)}
             </div>
           ` : ''}
-          <div class="message-bubble" style="${isSent ? '' : `background: white;`}">
-            <div class="message-text" style="color: ${isSent ? '#0f172a' : (sender?.colors?.commentText || '#334155')};">${msg.text || ''}</div>
+          <div class="message-bubble">
+            ${!isSent && senderDisplayName ? `<div class="message-sender-name" style="color: ${sender?.colors?.name || '#f59e0b'};">${senderDisplayName}</div>` : ''}
+            <div class="message-text">${renderMessageContent(msg.text || '')}</div>
             <div class="message-time">
               ${isSent ? `
                 <span class="message-status ${msg.read ? 'read' : 'sent'}">
@@ -2307,12 +3074,32 @@
     container.scrollTop = container.scrollHeight;
   }
 
+  function handleShortcutInput(e) {
+    const input = e.target;
+    const text = input.value;
+    
+    if (text.startsWith('/')) {
+      const shortcutKey = text.trim();
+      if (chatSettings.shortcuts[shortcutKey]) {
+        input.value = chatSettings.shortcuts[shortcutKey];
+      }
+    }
+  }
+
   window.sendMessage = async function() {
     const input = document.getElementById('messageInput');
     if (!input) return;
     
-    const text = input.value.trim();
+    let text = input.value.trim();
     if (!text || !activeChatId || !currentUser) return;
+    
+    // فحص الاختصارات
+    if (text.startsWith('/')) {
+      const shortcutValue = chatSettings.shortcuts[text];
+      if (shortcutValue) {
+        text = shortcutValue;
+      }
+    }
     
     const otherUid = activeChatData.participants.find(p => p !== currentUser.uid);
     const isOtherBlocked = activeChatData.blockedBy?.includes(otherUid);
@@ -2322,7 +3109,6 @@
       return;
     }
     
-    // فحص الرسالة
     const isAllowed = await checkMessage(
       text,
       currentUser.uid,
@@ -2362,6 +3148,7 @@
       }
       
       input.value = '';
+      playSendSound();
     } catch (error) {
       showToast('فشل إرسال الرسالة', false);
     }
@@ -2376,12 +3163,282 @@
     activeChatId = null;
     activeChatData = null;
     activeOtherUser = null;
+    lastMessageSenderId = null;
     
-    // إعادة تفعيل زر الحظر
     const blockBtn = document.getElementById('blockBtn');
     blockBtn.style.display = 'block';
+    
+    // إعادة تعيين متغيرات CSS
+    const chatRoom = document.getElementById('chatRoom');
+    chatRoom.style.setProperty('--chat-bg-image', 'none');
   };
 
+  // ========== دوال إعدادات المحادثة ==========
+  window.showChatSettings = function() {
+    // تحديث واجهة الإعدادات بالقيم الحالية
+    document.getElementById('nicknameInput').value = chatSettings.nickname || '';
+    document.getElementById('currentNicknameDisplay').innerHTML = chatSettings.nickname ? 
+      `الكنية الحالية: <strong>${chatSettings.nickname}</strong>` : 'لا توجد كنية';
+    
+    document.getElementById('bgUrlInput').value = '';
+    renderBgUrlList();
+    
+    document.getElementById('sentBubbleColor').value = chatSettings.sentBubbleColor;
+    document.getElementById('receivedBubbleColor').value = chatSettings.receivedBubbleColor;
+    document.getElementById('sentTextColor').value = chatSettings.sentTextColor;
+    document.getElementById('receivedTextColor').value = chatSettings.receivedTextColor;
+    
+    document.getElementById('fontFamilySelect').value = chatSettings.fontFamily;
+    document.getElementById('fontSizeSlider').value = chatSettings.fontSize;
+    document.getElementById('fontSizeValue').textContent = chatSettings.fontSize + 'px';
+    
+    renderCustomEmojis();
+    renderShortcuts();
+    
+    document.getElementById('chatSettingsModal').classList.add('active');
+  };
+
+  window.closeChatSettings = function() {
+    document.getElementById('chatSettingsModal').classList.remove('active');
+  };
+
+  window.switchSettingsTab = function(tab) {
+    document.querySelectorAll('.settings-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.settings-panel').forEach(p => p.classList.remove('active'));
+    
+    document.querySelector(`.settings-tab[onclick*="${tab}"]`).classList.add('active');
+    document.getElementById(`panel-${tab}`).classList.add('active');
+  };
+
+  // الكنية
+  window.saveNickname = async function() {
+    const nickname = document.getElementById('nicknameInput').value.trim();
+    chatSettings.nickname = nickname;
+    await saveChatSettings();
+    
+    document.getElementById('currentNicknameDisplay').innerHTML = nickname ? 
+      `الكنية الحالية: <strong>${nickname}</strong>` : 'لا توجد كنية';
+    
+    // تحديث اسم المحادثة
+    if (activeChatId) {
+      const displayName = nickname || activeOtherUser?.username || 'مستخدم';
+      document.getElementById('chatRoomName').innerHTML = `
+        <span style="color: ${activeOtherUser?.colors?.name || '#0f172a'};">${displayName}</span>
+        ${nickname ? `<span class="chat-nickname">${nickname}</span>` : ''}
+        <span class="chat-id" style="background: ${activeOtherUser?.colors?.frame || '#fbbf24'}; color: ${activeOtherUser?.colors?.id || '#8b5cf6'};">#${activeOtherUser?.userId || ''}</span>
+      `;
+    }
+    
+    showToast('تم حفظ الكنية');
+  };
+
+  window.deleteNickname = async function() {
+    chatSettings.nickname = '';
+    await saveChatSettings();
+    document.getElementById('nicknameInput').value = '';
+    document.getElementById('currentNicknameDisplay').innerHTML = 'لا توجد كنية';
+    
+    if (activeChatId) {
+      const displayName = activeOtherUser?.username || 'مستخدم';
+      document.getElementById('chatRoomName').innerHTML = `
+        <span style="color: ${activeOtherUser?.colors?.name || '#0f172a'};">${displayName}</span>
+        <span class="chat-id" style="background: ${activeOtherUser?.colors?.frame || '#fbbf24'}; color: ${activeOtherUser?.colors?.id || '#8b5cf6'};">#${activeOtherUser?.userId || ''}</span>
+      `;
+    }
+    
+    showToast('تم حذف الكنية');
+  };
+
+  // الخلفية
+  function renderBgUrlList() {
+    const container = document.getElementById('bgUrlList');
+    const urls = chatSettings.backgroundUrl ? [chatSettings.backgroundUrl] : [];
+    
+    if (urls.length === 0) {
+      container.innerHTML = '<p style="color:#94a3b8; font-size:13px;">لا توجد خلفية</p>';
+      return;
+    }
+    
+    container.innerHTML = urls.map(url => `
+      <div class="bg-url-item">
+        <span>${url.substring(0, 40)}...</span>
+        <i class="fas fa-trash" onclick="removeBackgroundUrl('${url}')" style="color:#ef4444; cursor:pointer;"></i>
+      </div>
+    `).join('');
+  }
+
+  window.addBackgroundUrl = async function() {
+    const input = document.getElementById('bgUrlInput');
+    const url = input.value.trim();
+    if (!url) return;
+    
+    chatSettings.backgroundUrl = url;
+    await saveChatSettings();
+    applyChatAppearance();
+    renderBgUrlList();
+    input.value = '';
+    showToast('تم تعيين الخلفية');
+  };
+
+  window.removeBackgroundUrl = async function(url) {
+    chatSettings.backgroundUrl = '';
+    await saveChatSettings();
+    applyChatAppearance();
+    renderBgUrlList();
+    showToast('تم إزالة الخلفية');
+  };
+
+  window.removeBackground = async function() {
+    chatSettings.backgroundUrl = '';
+    await saveChatSettings();
+    applyChatAppearance();
+    renderBgUrlList();
+    showToast('تم إزالة الخلفية');
+  };
+
+  // الألوان
+  window.applyColors = async function() {
+    chatSettings.sentBubbleColor = document.getElementById('sentBubbleColor').value;
+    chatSettings.receivedBubbleColor = document.getElementById('receivedBubbleColor').value;
+    chatSettings.sentTextColor = document.getElementById('sentTextColor').value;
+    chatSettings.receivedTextColor = document.getElementById('receivedTextColor').value;
+    
+    await saveChatSettings();
+    applyChatAppearance();
+    showToast('تم تطبيق الألوان');
+  };
+
+  // الخط
+  document.addEventListener('DOMContentLoaded', () => {
+    const slider = document.getElementById('fontSizeSlider');
+    if (slider) {
+      slider.addEventListener('input', (e) => {
+        document.getElementById('fontSizeValue').textContent = e.target.value + 'px';
+      });
+    }
+  });
+
+  window.applyFont = async function() {
+    chatSettings.fontFamily = document.getElementById('fontFamilySelect').value;
+    chatSettings.fontSize = parseInt(document.getElementById('fontSizeSlider').value);
+    
+    await saveChatSettings();
+    applyChatAppearance();
+    showToast('تم تطبيق الخط');
+  };
+
+  // الإيموجيات
+  function renderCustomEmojis() {
+    const container = document.getElementById('customEmojiList');
+    const emojis = chatSettings.customEmojis || [];
+    
+    if (emojis.length === 0) {
+      container.innerHTML = '<p style="color:#94a3b8; font-size:13px; width:100%;">لا توجد إيموجيات مخصصة</p>';
+      return;
+    }
+    
+    container.innerHTML = emojis.map((emoji, index) => `
+      <div class="emoji-item" onclick="insertEmoji('${emoji}')">
+        ${emoji}
+        <span class="delete-emoji" onclick="event.stopPropagation(); deleteCustomEmoji(${index})">×</span>
+      </div>
+    `).join('');
+  }
+
+  window.addCustomEmoji = async function() {
+    const input = document.getElementById('newEmojiInput');
+    const emoji = input.value.trim();
+    if (!emoji) return;
+    
+    if (!chatSettings.customEmojis) chatSettings.customEmojis = [];
+    if (chatSettings.customEmojis.includes(emoji)) {
+      showToast('الإيموجي موجود مسبقاً', false);
+      return;
+    }
+    
+    chatSettings.customEmojis.push(emoji);
+    await saveChatSettings();
+    renderCustomEmojis();
+    input.value = '';
+    showToast('تمت إضافة الإيموجي');
+  };
+
+  window.deleteCustomEmoji = async function(index) {
+    chatSettings.customEmojis.splice(index, 1);
+    await saveChatSettings();
+    renderCustomEmojis();
+    showToast('تم حذف الإيموجي');
+  };
+
+  window.insertEmoji = function(emoji) {
+    const input = document.getElementById('messageInput');
+    if (input) {
+      input.value += emoji;
+      input.focus();
+    }
+    closeChatSettings();
+  };
+
+  // الاختصارات
+  function renderShortcuts() {
+    const container = document.getElementById('shortcutList');
+    const shortcuts = chatSettings.shortcuts || {};
+    const entries = Object.entries(shortcuts);
+    
+    if (entries.length === 0) {
+      container.innerHTML = '<p style="color:#94a3b8; font-size:13px;">لا توجد اختصارات</p>';
+      return;
+    }
+    
+    container.innerHTML = entries.map(([key, value]) => `
+      <div class="shortcut-item">
+        <div class="shortcut-info">
+          <div class="shortcut-key">${key}</div>
+          <div class="shortcut-value">${value.substring(0, 50)}${value.length > 50 ? '...' : ''}</div>
+        </div>
+        <div class="shortcut-actions">
+          <i class="fas fa-trash" onclick="deleteShortcut('${key}')"></i>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  window.addShortcut = async function() {
+    const keyInput = document.getElementById('shortcutKeyInput');
+    const valueInput = document.getElementById('shortcutValueInput');
+    
+    const key = keyInput.value.trim();
+    const value = valueInput.value.trim();
+    
+    if (!key || !value) {
+      showToast('الرجاء إدخال الاختصار والقيمة', false);
+      return;
+    }
+    
+    if (!key.startsWith('/')) {
+      showToast('يجب أن يبدأ الاختصار بـ /', false);
+      return;
+    }
+    
+    if (!chatSettings.shortcuts) chatSettings.shortcuts = {};
+    chatSettings.shortcuts[key] = value;
+    
+    await saveChatSettings();
+    renderShortcuts();
+    
+    keyInput.value = '';
+    valueInput.value = '';
+    showToast('تمت إضافة الاختصار');
+  };
+
+  window.deleteShortcut = async function(key) {
+    delete chatSettings.shortcuts[key];
+    await saveChatSettings();
+    renderShortcuts();
+    showToast('تم حذف الاختصار');
+  };
+
+  // ========== دوال الفلتر ==========
   window.showFilterModal = function() {
     renderFilterWords();
     renderMonitorLogs();
@@ -2528,6 +3585,7 @@
     }
   };
 
+  // ========== دوال المحادثة الجديدة والحذف والحظر ==========
   window.showNewChatModal = function() {
     document.getElementById('newChatModal').classList.add('active');
     document.getElementById('newChatUserId').value = '';
@@ -2567,6 +3625,11 @@
       const batch = writeBatch(db);
       messagesSnap.docs.forEach(doc => batch.delete(doc.ref));
       batch.delete(doc(db, "chats", chatToDelete));
+      
+      // حذف إعدادات المحادثة
+      const settingsRef = doc(db, "chat_settings", `${currentUser.uid}_${chatToDelete}`);
+      batch.delete(settingsRef);
+      
       await batch.commit();
       
       showToast('تم حذف المحادثة');
@@ -2657,8 +3720,12 @@
     showToast('تم التحديث');
   };
 
-  // تهيئة الأحداث
+  // ========== تهيئة الأحداث ==========
   window.addEventListener('load', () => {
+    // تهيئة الصوت
+    sendSound = document.getElementById('sendSound');
+    receiveSound = document.getElementById('receiveSound');
+    
     const searchInput = document.getElementById('searchChatsInput');
     if (searchInput) {
       searchInput.addEventListener('input', (e) => {
@@ -2667,7 +3734,7 @@
       });
     }
 
-    document.querySelectorAll('.confirm-modal, .all-chats-modal, .search-user-modal, .filter-modal').forEach(m => {
+    document.querySelectorAll('.confirm-modal, .all-chats-modal, .search-user-modal, .filter-modal, .chat-settings-modal, .image-viewer-modal').forEach(m => {
       m.addEventListener('click', function(e) {
         if (e.target === this) this.classList.remove('active');
       });
@@ -2681,7 +3748,7 @@
     }
   });
 
-  // المصادقة
+  // ========== المصادقة ==========
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       currentUser = user;
