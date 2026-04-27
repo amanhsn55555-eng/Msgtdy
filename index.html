@@ -3323,19 +3323,21 @@ function playNotificationSound() {
     if (!input) return;
     const text = input.value.trim();
     if (!text || !activeChatId || !currentUser) return;
-    
-    try {
-      await addDoc(collection(db, "chats", activeChatId, "messages"), {
+  // ⚡ امسح الحقل فوراً
+input.value = '';
+input.focus();
+
+try {
+  await addDoc(collection(db, "chats", activeChatId, "messages"), {        
         text, senderId: currentUser.uid, timestamp: Date.now(), read: false, isAdmin: true
       });
       await updateDoc(doc(db, "chats", activeChatId), {
         lastMessageText: text, lastMessageTime: Date.now(), updatedAt: Date.now()
       });
-      input.value = '';
-      playSendSound();
-    } catch (error) {
-      showToast('فشل إرسال الرسالة', false);
-    }
+       playSendSound();
+  } catch (error) {
+    showToast('فشل إرسال الرسالة', false);
+  }
   };
 
   window.deleteChatAsAdmin = async function(chatId) {
@@ -3672,22 +3674,29 @@ function playNotificationSound() {
     if (isOtherBlocked) {
       inputContainer.innerHTML = '<div class="blocked-message"><i class="fas fa-ban"></i> لقد قمت بحظر هذا المستخدم - لا يمكنك إرسال رسائل</div>';
     } else {
-      inputContainer.innerHTML = `
-        <input type="text" id="messageInput" placeholder="اكتب رسالتك..." autocomplete="off">
-        <button onclick="sendMessage()" id="sendBtn"><i class="fas fa-paper-plane"></i></button>
-      `;
       
-      setTimeout(() => {
-        const msgInput = document.getElementById('messageInput');
-        if (msgInput) {
-          msgInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') sendMessage();
-          });
-          msgInput.addEventListener('input', handleShortcutInput);
+     inputContainer.innerHTML = `
+  <input type="text" id="messageInput" placeholder="اكتب رسالتك..." autocomplete="off">
+  <button onclick="sendMessageFast()" id="sendBtn"><i class="fas fa-paper-plane"></i></button>
+`;
+
+setTimeout(() => {
+  const msgInput = document.getElementById('messageInput');
+  if (msgInput) {
+    // ⚡ مستمع Enter للإرسال الفوري
+    msgInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        var txt = this.value.trim();
+        if (txt) {
+          sendMessageFast(txt);
         }
-      }, 100);
+      }
+    });
+    msgInput.addEventListener('input', handleShortcutInput);
+  }
+}, 100);
     }
-    
     if (!isOtherBlocked) {
       try {
         await updateDoc(doc(db, "chats", chatId), {
@@ -4660,6 +4669,70 @@ window.openEmojiSettings = function() {
       showMainContent();
     }
   });
+  
+  
+  // ⚡ دالة الإرسال الفوري
+window.sendMessageFast = async function(preTypedText) {
+  const input = document.getElementById('messageInput');
+  let text = preTypedText || (input ? input.value.trim() : '');
+  if (!text || !activeChatId || !currentUser) return;
+  
+  // ⚡ امسح فوراً
+  if (input) {
+    input.value = '';
+    input.focus();
+  }
+  
+  // اختصارات الإيموجي
+  var shortcuts = {
+    ':)': '😊', ':D': '😃', ';)': '😉', ':P': '😛', '<3': '❤️',
+    ':*': '😘', ':(': '😢', ":'(": '😭', '>:(': '😠', '+1': '👍',
+    'ok': '👌', 'cool': '😎', 'love': '❤️', 'fire': '🔥', 'crown': '👑'
+  };
+  for (var key in shortcuts) {
+    text = text.replace(new RegExp(key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), shortcuts[key]);
+  }
+  
+  // فحص الاختصارات المخصصة
+  if (text.startsWith('/') && chatSettings.shortcuts[text]) {
+    text = chatSettings.shortcuts[text];
+  }
+  
+  var otherUid = activeChatData.participants.find(p => p !== currentUser.uid);
+  var isOtherBlocked = activeChatData.blockedBy?.includes(otherUid);
+  
+  if (isOtherBlocked) {
+    showToast('لا يمكنك إرسال رسائل لهذا المستخدم لأنه محظور', false);
+    return;
+  }
+  
+  try {
+    // إرسال بدون انتظار
+    addDoc(collection(db, "chats", activeChatId, "messages"), {
+      text, senderId: currentUser.uid, timestamp: Date.now(), read: false
+    });
+    
+    updateDoc(doc(db, "chats", activeChatId), {
+      lastMessageText: text, lastMessageTime: Date.now(), updatedAt: Date.now()
+    });
+    
+    if (otherUid) {
+      try {
+        updateDoc(doc(db, "chats", activeChatId), {
+          [`unreadCount.${otherUid}`]: (activeChatData.unreadCount?.[otherUid] || 0) + 1
+        });
+      } catch(e) {
+        updateDoc(doc(db, "chats", activeChatId), {
+          unreadCount: { [otherUid]: 1 }
+        });
+      }
+    }
+    
+    playSendSound();
+  } catch (error) {
+    showToast('فشل إرسال الرسالة', false);
+  }
+};
 </script>
 </body>
 </html>
