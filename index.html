@@ -4733,6 +4733,159 @@ window.sendMessageFast = async function(preTypedText) {
     showToast('فشل إرسال الرسالة', false);
   }
 };
+  
+// ========== تخزين واسترجاع قائمة المحادثات فقط ==========
+// آمن 100% - لا يعدل أي دالة - فقط يحفظ ويسترجع
+
+// استرجاع سريع للقائمة المخزنة عند فتح الصفحة
+(function() {
+    try {
+        var savedChats = localStorage.getItem('messenger_chats_list');
+        var savedTime = localStorage.getItem('messenger_chats_time');
+        
+        if (savedChats && savedTime) {
+            var age = Date.now() - parseInt(savedTime);
+            if (age < 86400000) { // 24 ساعة
+                var chats = JSON.parse(savedChats);
+                if (chats && chats.length > 0) {
+                    // إخفاء شاشة التحميل
+                    var loader = document.getElementById('loadingScreen');
+                    if (loader) loader.style.display = 'none';
+                    
+                    // إظهار الهيدر ومربع البحث
+                    var header = document.querySelector('.messenger-header');
+                    var search = document.querySelector('.search-section');
+                    var container = document.getElementById('chatsContainer');
+                    
+                    if (header) header.style.display = 'flex';
+                    if (search) search.style.display = 'flex';
+                    if (container) {
+                        container.style.display = 'block';
+                        
+                        var html = '';
+                        for (var i = 0; i < chats.length; i++) {
+                            var c = chats[i];
+                            var user = c.otherUser;
+                            if (!user) continue;
+                            
+                            var blocked = c.blockedBy && c.blockedBy.indexOf(user.uid) !== -1;
+                            var name = user.username || 'مستخدم';
+                            var frame = (user.colors && user.colors.frame) ? user.colors.frame : '#fbbf24';
+                            var nameColor = (user.colors && user.colors.name) ? user.colors.name : '#0f172a';
+                            var idColor = (user.colors && user.colors.id) ? user.colors.id : '#8b5cf6';
+                            var msgColor = (user.colors && user.colors.commentText) ? user.colors.commentText : '#64748b';
+                            var lastMsg = c.lastMessage ? c.lastMessage.text : 'ابدأ المحادثة الآن...';
+                            var timeText = '';
+                            if (c.lastMessageTime) {
+                                var d = new Date(c.lastMessageTime);
+                                var n = new Date();
+                                if (d.toDateString() === n.toDateString()) {
+                                    timeText = d.toLocaleTimeString('ar-SA', {hour:'2-digit', minute:'2-digit'});
+                                } else {
+                                    timeText = d.toLocaleDateString('ar-SA');
+                                }
+                            }
+                            
+                            var avatar = user.avatarType === 'image' && user.avatarUrl 
+                                ? '<img src="' + user.avatarUrl + '" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML=\'👤\'">' 
+                                : (user.emoji || '👤');
+                            
+                            html += '<div class="chat-item ' + (blocked ? 'blocked' : '') + '" onclick="if(window.openChat)window.openChat(\'' + c.id + '\')">' +
+                                '<div class="chat-avatar" style="border-color:' + frame + ';">' + avatar + '<span class="online-indicator"></span></div>' +
+                                '<div class="chat-info">' +
+                                    '<div class="chat-header">' +
+                                        '<div class="chat-name"><span style="color:' + nameColor + ';">' + name + '</span><span class="chat-id" style="background:' + frame + ';color:' + idColor + ';">#' + (user.userId || '') + '</span></div>' +
+                                        '<span class="chat-time">' + timeText + '</span>' +
+                                    '</div>' +
+                                    '<div class="last-message" style="color:' + msgColor + ';">' + (blocked ? '🔇 محظور' : lastMsg) + '</div>' +
+                                '</div>' +
+                            '</div>';
+                        }
+                        container.innerHTML = html;
+                    }
+                }
+            }
+        }
+    } catch(e) {}
+})();
+
+// دالة حفظ قائمة المحادثات (تُستدعى بعد كل تحديث)
+function saveMessengerChatsList() {
+    try {
+        if (!chats || !chats.length || !currentUser) return;
+        
+        var toSave = [];
+        for (var i = 0; i < Math.min(chats.length, 20); i++) {
+            var c = chats[i];
+            var user = c.otherUser;
+            toSave.push({
+                id: c.id,
+                participants: c.participants,
+                lastMessageText: c.lastMessageText || '',
+                lastMessageTime: c.lastMessageTime || c.updatedAt || 0,
+                unreadCount: c.unreadCount || {},
+                blockedBy: c.blockedBy || [],
+                otherUser: user ? {
+                    uid: user.uid,
+                    username: user.username || '',
+                    userId: user.userId || '',
+                    emoji: user.emoji || '😎',
+                    avatarType: user.avatarType || 'emoji',
+                    avatarUrl: user.avatarUrl || '',
+                    colors: user.colors || {}
+                } : null,
+                lastMessage: c.lastMessage ? {
+                    text: c.lastMessage.text || '',
+                    timestamp: c.lastMessage.timestamp || 0
+                } : null
+            });
+        }
+        
+        localStorage.setItem('messenger_chats_list', JSON.stringify(toSave));
+        localStorage.setItem('messenger_chats_time', Date.now());
+    } catch(e) {}
+}
+
+// حفظ تلقائي كل 10 ثواني
+setInterval(function() {
+    if (currentUser && chats && chats.length > 0) {
+        saveMessengerChatsList();
+    }
+}, 10000);
+
+// حفظ عند الخروج أو تغيير الصفحة
+window.addEventListener('beforeunload', function() {
+    if (currentUser && chats && chats.length > 0) {
+        saveMessengerChatsList();
+    }
+});
+
+// مسح الكاش عند تسجيل الخروج
+var _originalAuth2 = onAuthStateChanged;
+onAuthStateChanged(auth, async function(user) {
+    if (!user) {
+        localStorage.removeItem('messenger_chats_list');
+        localStorage.removeItem('messenger_chats_time');
+    }
+    // استدعاء الكود الأصلي
+    if (user) {
+        currentUser = user;
+        await loadUserData(user.uid);
+        if (!isInitialized) {
+            isInitialized = true;
+            subscribeToChats();
+            showMainContent();
+            setTimeout(function() {
+                var tu = localStorage.getItem('openChatWith');
+                if (tu) { localStorage.removeItem('openChatWith'); startChatWithUser(tu); }
+            }, 2000);
+        }
+    } else {
+        var cc = document.getElementById('chatsContainer');
+        if (cc) cc.innerHTML = '<div class="empty-state"><i class="fas fa-sign-in-alt"></i><p>يرجى تسجيل الدخول للوصول إلى الماسنجر</p></div>';
+        showMainContent();
+    }
+});
 </script>
 </body>
-</html>
+</html> 
