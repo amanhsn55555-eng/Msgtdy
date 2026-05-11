@@ -3739,7 +3739,7 @@ setTimeout(() => {
         e.preventDefault();
         var txt = this.value.trim();
         if (txt) {
-          sendMessageFast(txt);
+          sendMessage();
         }
       }
     });
@@ -3925,87 +3925,6 @@ setTimeout(() => {
       }
     }
   }
-
-  window.sendMessage = async function() {
-    const input = document.getElementById('messageInput');
-    if (!input) return;
-    let text = input.value.trim();
-    if (!text || !activeChatId || !currentUser) return;
-    
-    // تحويل اختصارات الإيموجي
-    const shortcuts = {
-        ':)': '😊', ':D': '😃', ';)': '😉', ':P': '😛', '<3': '❤️',
-        ':*': '😘', ':(': '😢', ":'(": '😭', '>:(': '😠', '+1': '👍',
-        'ok': '👌', 'cool': '😎', 'love': '❤️', 'fire': '🔥', 'crown': '👑'
-    };
-    
-    for (const [shortcut, emoji] of Object.entries(shortcuts)) {
-        if (text.includes(shortcut)) {
-            text = text.replace(new RegExp(shortcut.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), emoji);
-        }
-    }
-    if (!text || !activeChatId || !currentUser) return;
-    
-    // فحص الاختصارات
-    if (text.startsWith('/')) {
-      const shortcutValue = chatSettings.shortcuts[text];
-      if (shortcutValue) {
-        text = shortcutValue;
-      }
-    }
-    
-    const otherUid = activeChatData.participants.find(p => p !== currentUser.uid);
-    const isOtherBlocked = activeChatData.blockedBy?.includes(otherUid);
-    
-    if (isOtherBlocked) {
-      showToast('لا يمكنك إرسال رسائل لهذا المستخدم لأنه محظور', false);
-      return;
-    }
-    
-    const isAllowed = await checkMessage(
-      text,
-      currentUser.uid,
-      currentUserData?.username || 'مستخدم',
-      renderAvatar(currentUserData),
-      activeChatId
-    );
-    
-    if (!isAllowed) {
-      return;
-    }
-    
-    try {
-      await addDoc(collection(db, "chats", activeChatId, "messages"), {
-        text,
-        senderId: currentUser.uid,
-        timestamp: Date.now(),
-        read: false
-      });
-      
-      await updateDoc(doc(db, "chats", activeChatId), {
-        lastMessageText: text,
-        lastMessageTime: Date.now(),
-        updatedAt: Date.now()
-      });
-      
-      if (otherUid) {
-        try {
-          await updateDoc(doc(db, "chats", activeChatId), {
-            [`unreadCount.${otherUid}`]: (activeChatData.unreadCount?.[otherUid] || 0) + 1
-          });
-        } catch (e) {
-          await updateDoc(doc(db, "chats", activeChatId), {
-            unreadCount: { [otherUid]: 1 }
-          });
-        }
-      }
-      
-      input.value = '';
-      playSendSound();
-    } catch (error) {
-      showToast('فشل إرسال الرسالة', false);
-    }
-  };
 
   window.closeChatRoom = function() {
     document.getElementById('chatRoom').classList.remove('active');
@@ -4719,65 +4638,47 @@ window.openEmojiSettings = function() {
       showMainContent();
     }
   });
-  
-  
-  // ⚡ دالة الإرسال الفوري
-window.sendMessageFast = async function(preTypedText) {
+   // ⚡ دالة الإرسال الموحدة
+window.sendMessage = async function() {
   const input = document.getElementById('messageInput');
-  let text = preTypedText || (input ? input.value.trim() : '');
+  if (!input) return;
+  let text = input.value.trim();
   if (!text || !activeChatId || !currentUser) return;
   
-  // ⚡ امسح فوراً
-  if (input) {
-    input.value = '';
-    input.focus();
-  }
+  input.value = '';
+  input.focus();
   
-  // اختصارات الإيموجي
-  var shortcuts = {
+  const shortcuts = {
     ':)': '😊', ':D': '😃', ';)': '😉', ':P': '😛', '<3': '❤️',
     ':*': '😘', ':(': '😢', ":'(": '😭', '>:(': '😠', '+1': '👍',
     'ok': '👌', 'cool': '😎', 'love': '❤️', 'fire': '🔥', 'crown': '👑'
   };
-  for (var key in shortcuts) {
-    text = text.replace(new RegExp(key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), shortcuts[key]);
+  for (const [key, val] of Object.entries(shortcuts)) {
+    text = text.replace(new RegExp(key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), val);
   }
   
-  // فحص الاختصارات المخصصة
   if (text.startsWith('/') && chatSettings.shortcuts[text]) {
     text = chatSettings.shortcuts[text];
   }
   
-  var otherUid = activeChatData.participants.find(p => p !== currentUser.uid);
-  var isOtherBlocked = activeChatData.blockedBy?.includes(otherUid);
-  
-  if (isOtherBlocked) {
+  const otherUid = activeChatData.participants.find(p => p !== currentUser.uid);
+  if (activeChatData.blockedBy?.includes(otherUid)) {
     showToast('لا يمكنك إرسال رسائل لهذا المستخدم لأنه محظور', false);
     return;
   }
   
   try {
-    // إرسال بدون انتظار
     addDoc(collection(db, "chats", activeChatId, "messages"), {
       text, senderId: currentUser.uid, timestamp: Date.now(), read: false
     });
-    
     updateDoc(doc(db, "chats", activeChatId), {
       lastMessageText: text, lastMessageTime: Date.now(), updatedAt: Date.now()
     });
-    
     if (otherUid) {
-      try {
-        updateDoc(doc(db, "chats", activeChatId), {
-          [`unreadCount.${otherUid}`]: (activeChatData.unreadCount?.[otherUid] || 0) + 1
-        });
-      } catch(e) {
-        updateDoc(doc(db, "chats", activeChatId), {
-          unreadCount: { [otherUid]: 1 }
-        });
-      }
+      updateDoc(doc(db, "chats", activeChatId), {
+        [`unreadCount.${otherUid}`]: (activeChatData.unreadCount?.[otherUid] || 0) + 1
+      }).catch(() => {});
     }
-    
     playSendSound();
   } catch (error) {
     showToast('فشل إرسال الرسالة', false);
